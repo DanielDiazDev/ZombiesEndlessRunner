@@ -33,6 +33,14 @@ public class Player : MonoBehaviour
         Jump();
         _isJump = false;
     }
+    public void SetSpeedMultiplier(float speedMultiplier)
+    {
+        _speedMovement *= speedMultiplier;
+    }
+    public void SetSpeedDivided(float speedDivided)
+    {
+        _speedMovement /= speedDivided;
+    }
 
     private void Jump()
     {
@@ -46,5 +54,6 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(_groundController.position, _size);
+
     }
 }

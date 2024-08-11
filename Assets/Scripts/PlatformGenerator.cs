@@ -11,6 +11,7 @@ public class PlatformGenerator : MonoBehaviour
     [SerializeField] private List<GameObject> _levelsHard;
     [SerializeField] private Transform _player;
     [SerializeField] private Transform _gameobjectParent;
+    [SerializeField] private GameObject _porwerUpPlatform;
     private Transform _endposition;
     private const float PLAYER_DISTANCE_SPAWN_LEVEL = 30f;
     private int _levelPartsSpawned;
@@ -53,29 +54,34 @@ public class PlatformGenerator : MonoBehaviour
 
     private void SpawnLevelPart()
     {
-        List<GameObject> difficultyLevelsPartList = new List<GameObject>();
-        switch (GetDifficulty())
+        GameObject chosenLevelPart;
+        if(_levelPartsSpawned > 0 && _levelPartsSpawned % 5 == 0)
         {
-            case Difficulty.Easy:
-                difficultyLevelsPartList = _levelsEasy;
-                break;
-            case Difficulty.Medium:
-                difficultyLevelsPartList = _levelsMedium;
-                break;
-            case Difficulty.Hard:
-                difficultyLevelsPartList = _levelsHard;
-                break;
-            default:
-                break;
+            chosenLevelPart = _porwerUpPlatform;
         }
-
-
-        var chosenLevelPart = difficultyLevelsPartList[Random.Range(0, difficultyLevelsPartList.Count)];
-        if (pfTestingPlatform != null)
+        else
         {
-            chosenLevelPart = pfTestingPlatform.gameObject;
+            List<GameObject> difficultyLevelsPartList = new List<GameObject>();
+            switch (GetDifficulty())
+            {
+                case Difficulty.Easy:
+                    difficultyLevelsPartList = _levelsEasy;
+                    break;
+                case Difficulty.Medium:
+                    difficultyLevelsPartList = _levelsMedium;
+                    break;
+                case Difficulty.Hard:
+                    difficultyLevelsPartList = _levelsHard;
+                    break;
+                default:
+                    break;
+            }
+            chosenLevelPart = difficultyLevelsPartList[Random.Range(0, difficultyLevelsPartList.Count)];
+            if (pfTestingPlatform != null)
+            {
+                chosenLevelPart = pfTestingPlatform.gameObject;
+            }
         }
-
         var level = Instantiate(chosenLevelPart, _endposition.position, Quaternion.identity, _gameobjectParent);
         _endposition = FindEndPosition(level, "EndPosition");
         _levelPartsSpawned++;
