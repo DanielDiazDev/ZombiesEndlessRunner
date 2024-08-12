@@ -10,7 +10,5 @@ public abstract class PowerUp : MonoBehaviour
    [SerializeField] protected float _duration;  
 
     public abstract void Activate(Player player);
-
-    //public abstract void Deactivate(GameObject player);
     public abstract IEnumerator Deactivate(Player player);
 }

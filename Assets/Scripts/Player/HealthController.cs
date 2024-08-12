@@ -7,6 +7,9 @@ public class HealthController : MonoBehaviour, IDamageable
 {
     [SerializeField] private int _currentHealth;
     private int _maxHealth = 2;
+    private bool _isInvunerable;
+    //public int CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
+    //Agregar luego a player analizar
 
     private void Start()
     {
@@ -15,12 +18,21 @@ public class HealthController : MonoBehaviour, IDamageable
 
     public void ReceiveDamage(int amount)
     {
-        _currentHealth -= amount;
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-        if( _currentHealth <= 0)
+        if (!_isInvunerable)
         {
-            Die();
+            _currentHealth -= amount;
+            _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
+            if (_currentHealth <= 0)
+            {
+                Die();
+            }
         }
+    }
+
+    public void Shield(bool state)
+    {
+         _isInvunerable = state;
+       
     }
 
     private void Die()

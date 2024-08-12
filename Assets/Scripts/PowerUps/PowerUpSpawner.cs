@@ -25,7 +25,7 @@ public class PowerUpSpawner : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            var powerUp = _powerUpsFactory.Create("Speed");
+            var powerUp = _powerUpsFactory.Create("Shield");
             //var id = _powerUps[Random.Range(0, _powerUps.Count)];
          //   var powerUp = _powerUpsFactory.Create(id);
             powerUp.Activate(_player);

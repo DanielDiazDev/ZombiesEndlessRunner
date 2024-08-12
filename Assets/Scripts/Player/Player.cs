@@ -3,57 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPlayer
 {
-    [SerializeField] private float _speedMovement;
-    //Jump
-    [SerializeField] private float _jumpForce;
-    [SerializeField] private LayerMask _groundLayerMask;
-    [SerializeField] private Transform _groundController;
-    [SerializeField] private Vector3 _size;
-    [SerializeField] private bool _isGrounded;
-    private bool _isJump;
-    private Rigidbody2D _rigidbody;
+    [SerializeField] private MovementController _movementController;
+    [SerializeField] private JumpController _jumpController;
+    [SerializeField] private HealthController _healthController;
+
+    public MovementController MovementController { get => _movementController; set => _movementController = value; }
+    public HealthController HealthController { get => _healthController; set => _healthController = value; }
 
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        _movementController.Configure(this);
+        _jumpController.Configure(this);
     }
-    private void Update()
-    {
-        if (Input.GetButtonDown("Jump"))
-        {
-            _isJump = true;
-        }
-    }
+
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector2(_speedMovement, _rigidbody.velocity.y);
-        _isGrounded = Physics2D.OverlapBox(_groundController.position, _size, 0, _groundLayerMask);
-        Jump();
-        _isJump = false;
-    }
-    public void SetSpeedMultiplier(float speedMultiplier)
-    {
-        _speedMovement *= speedMultiplier;
-    }
-    public void SetSpeedDivided(float speedDivided)
-    {
-        _speedMovement /= speedDivided;
+        _movementController.Move();
     }
 
-    private void Jump()
+    public void TryJump()
     {
-        if(_isGrounded && _isJump)
-        {
-            _isGrounded = false;
-            _rigidbody.AddForce(new Vector2(0, _jumpForce));
-        }
+        _jumpController.TryJump();
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(_groundController.position, _size);
-
-    }
+    
+    
 }

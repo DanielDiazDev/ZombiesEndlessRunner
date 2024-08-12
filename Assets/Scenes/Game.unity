@@ -352,10 +352,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d8b7eebe2388e84aaa0963764b30faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfTestingPlatform: {fileID: 0}
+  pfTestingPlatform: {fileID: 4223686430913655823, guid: a76c009227d041742b58293ee20c370e, type: 3}
   _levelStart: {fileID: 660224363}
   _levelsEasy:
-  - {fileID: 1764621049870503050, guid: 185fa5e461eaee94cbabe752557d90c6, type: 3}
+  - {fileID: 4190598388147438506, guid: a76c009227d041742b58293ee20c370e, type: 3}
   - {fileID: 1764621049870503050, guid: 185fa5e461eaee94cbabe752557d90c6, type: 3}
   - {fileID: 8898912325351005437, guid: 264c32ba0b12e3b4d80bec57edf78c45, type: 3}
   _levelsMedium:
@@ -1209,6 +1209,8 @@ GameObject:
   - component: {fileID: 1226281337}
   - component: {fileID: 1226281339}
   - component: {fileID: 1226281341}
+  - component: {fileID: 1226281342}
+  - component: {fileID: 1226281343}
   - component: {fileID: 1226281338}
   - component: {fileID: 1226281340}
   m_Layer: 0
@@ -1268,14 +1270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa6f5dace6573d418f69f18245535c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMovement: 5
-  _jumpForce: 300
-  _groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _groundController: {fileID: 697108586}
-  _size: {x: 1.02, y: 0.15, z: 0}
-  _isGrounded: 0
+  _movementController: {fileID: 1226281342}
+  _jumpController: {fileID: 1226281343}
+  _healthController: {fileID: 1226281341}
 --- !u!61 &1226281340
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1315,6 +1312,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHealth: 0
+--- !u!114 &1226281342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226281335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92338e18c57a47f4799f6953f47274cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedMovement: 5
+--- !u!114 &1226281343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226281335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd8ea76f1caf9b40a85e8d5136aff03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpForce: 300
+  _groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  _groundController: {fileID: 697108586}
+  _size: {x: 1.03, y: 0.21, z: 0}
 --- !u!1 &1249086711
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,18 +5,17 @@ public class ShieldPowerUp : PowerUp
 {
     public override void Activate(Player player)
     {
-        //player.GetComponent<PlayerHealth>().ActivateShield();
-        //Invoke("Deactivate", duration, player);
+        Debug.Log("Shield Activado");
+        player.HealthController.Shield(true);
+        StartCoroutine(Deactivate(player));
+
     }
 
     public override IEnumerator Deactivate(Player player)
     {
-        throw new System.NotImplementedException();
+        yield return new WaitForSeconds(_duration);
+        Debug.Log("Shield Desactivado");
+        player.HealthController.Shield(false);
+        Destroy(gameObject);
     }
-
-    //public override void Deactivate(GameObject player)
-    //{
-    //    //player.GetComponent<PlayerHealth>().DeactivateShield();
-    //    //Destroy(gameObject);
-    //}
 }
