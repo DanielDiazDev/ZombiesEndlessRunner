@@ -8,9 +8,12 @@ public class HealthController : MonoBehaviour, IDamageable
     [SerializeField] private int _currentHealth;
     private int _maxHealth = 2;
     private bool _isInvunerable;
-    //public int CurrentHealth { get => _currentHealth; set => _currentHealth = value; }
-    //Agregar luego a player analizar
+    private IPlayer _player;
 
+    public void Configure(IPlayer player)
+    {
+        _player = player;
+    }
     private void Start()
     {
         _currentHealth = _maxHealth;
@@ -22,10 +25,8 @@ public class HealthController : MonoBehaviour, IDamageable
         {
             _currentHealth -= amount;
             _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-            if (_currentHealth <= 0)
-            {
-                Die();
-            }
+            var die = _currentHealth <= 0;
+            _player.OnDamageReceived(die);
         }
     }
 
@@ -35,8 +36,5 @@ public class HealthController : MonoBehaviour, IDamageable
        
     }
 
-    private void Die()
-    {
-        Debug.Log("Muerto");
-    }
+    
 }
