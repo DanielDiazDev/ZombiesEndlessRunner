@@ -69,7 +69,6 @@ public class InGameMenuView : MonoBehaviour, InGameMenuMediator
         _isPaused = true;
         _pauseMenuView.Show();
     }
-
     private void ResumeGame()
     {
         _isPaused = false;

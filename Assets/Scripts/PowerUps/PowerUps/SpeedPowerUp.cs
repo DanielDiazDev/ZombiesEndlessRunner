@@ -9,14 +9,14 @@ public class SpeedPowerUp : PowerUp
     {
         
         Debug.Log("Speed Activado");
-        player.MovementController.SetSpeedMultiplier(_speedMultiplier, "*");
+        player.MoveJourneyController.SetSpeedMultiplier(_speedMultiplier, "*");
         StartCoroutine(Deactivate(player));
     }
 
     public override IEnumerator Deactivate(Player player)
     {
         yield return new WaitForSeconds(_duration);
-        player.MovementController.SetSpeedMultiplier(_speedMultiplier, "/");
+        player.MoveJourneyController.SetSpeedMultiplier(_speedMultiplier, "/");
         Destroy(gameObject);
     }
 }
